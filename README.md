@@ -1,7 +1,10 @@
-# tarsobank
+# Tarsobank
 
-Estrutura comentada
+Aplicativo de banco digital desenvolvido com Flutter. O Tarsobank irá permitir aos usuários realizar transferências, visualizar cotações de moedas, gerenciar perfil, entre outras funcionalidades bancárias.
 
+## 📁 Estrutura do Projeto
+
+```
 tarsobank/
 ├── android/
 ├── ios/
@@ -45,3 +48,15 @@ tarsobank/
 │   └── main.dart                 # Ponto de entrada
 ├── pubspec.yaml
 └── test/                         # Testes
+```
+
+## 🚀 Funcionalidades futuras
+
+- Autenticação de usuários
+- Tela de login e cadastro
+- Tela inicial com dashboard
+- Transferência de valores
+- Consulta de cotações de moedas
+- Gerenciamento de perfil
+- Temas personalizados
+- Banco de dados local
