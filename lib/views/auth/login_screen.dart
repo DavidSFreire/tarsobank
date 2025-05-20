@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:tarsobank/src/utils/theme.dart';
+import 'package:tarsobank/views/auth/register_screen.dart';
 import 'package:tarsobank/views/home/home_screen.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var cpfFormatter = MaskTextInputFormatter(
+      mask: '###.###.###-##',
+      filter: {
+        "#": RegExp(r'[0-9]'),
+      },
+    ); 
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -31,8 +40,12 @@ class LoginScreen extends StatelessWidget {
 
                 // Campo CPF
                 TextFormField(
-                  decoration: const InputDecoration(
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [cpfFormatter],
+                    decoration: InputDecoration(
                     labelText: 'CPF',
+                    hintText: '000.000.000-00',
+                    border: OutlineInputBorder(),
                     prefixIcon: Icon(Icons.person),
                   ),
                 ),
@@ -66,6 +79,10 @@ class LoginScreen extends StatelessWidget {
                 // Criar conta
                 TextButton(
                   onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                    );
                     // Navegar para tela de cadastro
                   },
                   child: const Text('Criar conta'),

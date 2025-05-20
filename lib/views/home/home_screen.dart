@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tarsobank/src/utils/theme.dart';
+import 'package:tarsobank/views/auth/login_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -84,7 +85,14 @@ class HomeScreen extends StatelessWidget {
                   context,
                   icon: Icons.person_outline,
                   label: 'Perfil',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
