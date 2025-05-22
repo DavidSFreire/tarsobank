@@ -83,7 +83,6 @@ class LoginScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(builder: (context) => const RegisterScreen()),
                     );
-                    // Navegar para tela de cadastro
                   },
                   child: const Text('Criar conta'),
                 ),
