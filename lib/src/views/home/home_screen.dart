@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tarsobank/src/utils/theme.dart';
-import 'package:tarsobank/views/auth/login_screen.dart';
+import 'package:tarsobank/src/views/auth/login_screen.dart';
+import 'package:tarsobank/src/views/quotation/quotation_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -67,7 +68,14 @@ class HomeScreen extends StatelessWidget {
                   context,
                   icon: Icons.currency_exchange,
                   label: 'Cotações',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const QuotationScreen(),
+                      ),
+                    );
+                  },
                 ),
                 _buildActionButton(
                   context,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class EnderecoDialog extends StatefulWidget {
   const EnderecoDialog({super.key});
@@ -20,6 +21,12 @@ class _EnderecoDialogState extends State<EnderecoDialog> {
 
   @override
   Widget build(BuildContext context) {
+    var cepFormatter = MaskTextInputFormatter(
+      mask: '#####-###',
+      filter: {
+        "#": RegExp(r'[0-9]'),
+      },
+    ); 
     return AlertDialog(
       title: const Text('Endereço'),
       content: SingleChildScrollView(
@@ -29,8 +36,11 @@ class _EnderecoDialogState extends State<EnderecoDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(  keyboardType: TextInputType.number,
-               inputFormatters: [FilteringTextInputFormatter.digitsOnly,LengthLimitingTextInputFormatter(8),],
-              controller: cep, decoration: const InputDecoration(labelText: 'CEP')),
+                    inputFormatters: [cepFormatter],
+                    decoration: InputDecoration(
+                    labelText: 'CEP',
+                    hintText: '00000-000',
+                    border: OutlineInputBorder())),
               TextFormField(controller: rua, decoration: const InputDecoration(labelText: 'Rua')),
               TextFormField(controller: numero, decoration: const InputDecoration(labelText: 'Número')),
               TextFormField(controller: complemento, decoration: const InputDecoration(labelText: 'Complemento')),
