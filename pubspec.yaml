@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   mask_text_input_formatter: ^2.4.0
+  http: ^1.2.1
 
 dev_dependencies:
   flutter_test:
@@ -18,3 +19,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/exchange.png

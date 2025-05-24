@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tarsobank/src/utils/theme.dart';
-import 'package:tarsobank/views/auth/login_screen.dart';
+import 'package:tarsobank/src/views/auth/login_screen.dart';
 
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen({super.key});

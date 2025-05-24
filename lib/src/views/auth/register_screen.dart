@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tarsobank/src/utils/endereco_dialog.dart';
 import 'package:tarsobank/src/utils/theme.dart';
-import 'package:tarsobank/views/auth/login_screen.dart';
+import 'package:tarsobank/src/views/auth/login_screen.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:tarsobank/views/auth/success_screen.dart';
+import 'package:tarsobank/src/views/auth/success_screen.dart';
 
 
 class RegisterScreen extends StatelessWidget {
@@ -12,6 +12,12 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var enderecoController = TextEditingController();
+    var numFormatter = MaskTextInputFormatter(
+      mask: '(##) #####-####',
+      filter: {
+        "#": RegExp(r'[0-9]'),
+      },
+    );
     var cpfFormatter = MaskTextInputFormatter(
       mask: '###.###.###-##',
       filter: {
@@ -63,8 +69,11 @@ class RegisterScreen extends StatelessWidget {
                 //campo Telefone
                 TextFormField(
                   keyboardType: TextInputType.phone,
+                  inputFormatters: [numFormatter],
                   decoration: const InputDecoration(
                     labelText: 'Telefone',
+                    hintText: '(00) 00000-0000', 
+                    border: OutlineInputBorder(),
                     prefixIcon: Icon(Icons.phone),
                   ),
                 ),

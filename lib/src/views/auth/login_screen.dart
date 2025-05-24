@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tarsobank/src/utils/theme.dart';
-import 'package:tarsobank/views/auth/register_screen.dart';
-import 'package:tarsobank/views/home/home_screen.dart';
+import 'package:tarsobank/src/views/auth/register_screen.dart';
+import 'package:tarsobank/src/views/home/home_screen.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 

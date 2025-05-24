@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tarsobank/src/utils/theme.dart';
-import 'package:tarsobank/views/splash_screen.dart';
+import 'package:tarsobank/src/views/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
