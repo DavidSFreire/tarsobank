@@ -89,7 +89,7 @@ class AppTheme {
       titleTextStyle: headlineMedium.copyWith(color: Colors.white),
       iconTheme: const IconThemeData(color: Colors.white),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       elevation: 4,
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       shape: RoundedRectangleBorder(
