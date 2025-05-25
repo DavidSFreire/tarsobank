@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  // Cores principais inspiradas no design Figma
-  static const Color primaryDark = Color(0xFF3629B7);    // Azul escuro
-  static const Color primaryLight = Color(0xFF0066CC);   // Azul médio
-  static const Color accentGreen = Color(0xFF00CC88);    // Verde
-  static const Color accentOrange = Color(0xFFFF6600);   // Laranja
-  static const Color background = Color(0xFFF2F4F7);     // Fundo cinza claro
-  static const Color cardColor = Color(0xFFFFFFFF);      // Branco puro
-  static const Color textPrimary = Color(0xFF1A1A1A);    // Preto mais intenso
-  static const Color textSecondary = Color(0xFF666666);  // Cinza médio
-  static const Color textDisabled = Color(0xFFAAAAAA);   // Cinza claro
-  static const Color dividerColor = Color(0xFFE0E0E0);   // Divisor
+  static const Color primaryDark = Color(0xFF3629B7);
+  static const Color primaryLight = Color(0xFF0066CC);
+  static const Color accentGreen = Color(0xFF00CC88);
+  static const Color accentOrange = Color(0xFFFF6600);
+  static const Color background = Color(0xFFF2F4F7);
+  static const Color cardColor = Color(0xFFFFFFFF);
+  static const Color textPrimary = Color(0xFF1A1A1A);
+  static const Color textSecondary = Color(0xFF666666);
+  static const Color textDisabled = Color(0xFFAAAAAA);
+  static const Color dividerColor = Color(0xFFE0E0E0);
 
   static LinearGradient primaryGradient = LinearGradient(
     colors: [primaryDark, primaryLight],
@@ -25,7 +24,6 @@ class AppTheme {
     end: Alignment.centerRight,
   );
 
-  // Tipografia
   static TextStyle headlineLarge = const TextStyle(
     fontSize: 30.0,
     fontWeight: FontWeight.w800,
@@ -75,7 +73,6 @@ class AppTheme {
     color: Colors.white,
   );
 
-  // Tema principal
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     scaffoldBackgroundColor: background,

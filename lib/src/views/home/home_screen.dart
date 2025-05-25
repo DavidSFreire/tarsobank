@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:tarsobank/src/utils/theme.dart';
 import 'package:tarsobank/src/views/auth/login_screen.dart';
 import 'package:tarsobank/src/views/quotation/quotation_screen.dart';
+import 'package:tarsobank/src/models/user_model.dart';
+import 'package:tarsobank/src/views/profile/profile_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final User user;
+
+  const HomeScreen({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Olá, Tarso',
+          'Olá, ${user.name.split(' ')[0]}',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 color: Colors.white,
               ),
@@ -21,6 +25,15 @@ class HomeScreen extends StatelessWidget {
             icon: const Icon(Icons.notifications_none),
             onPressed: () {},
           ),
+          IconButton(
+            icon: const Icon(Icons.account_circle),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileScreen(user: user)),
+              );
+            },
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -28,7 +41,6 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Card de saldo
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
@@ -57,8 +69,6 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 32),
-
-            // Botões de ação
             Wrap(
               spacing: 24,
               runSpacing: 24,
@@ -69,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                   icon: Icons.currency_exchange,
                   label: 'Cotações',
                   onTap: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const QuotationScreen(),
@@ -93,6 +103,19 @@ class HomeScreen extends StatelessWidget {
                   context,
                   icon: Icons.person_outline,
                   label: 'Perfil',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfileScreen(user: user),
+                      ),
+                    );
+                  },
+                ),
+                _buildActionButton(
+                  context,
+                  icon: Icons.logout,
+                  label: 'Sair',
                   onTap: () {
                     Navigator.pushReplacement(
                       context,
