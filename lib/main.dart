@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tarsobank/src/utils/theme.dart';
 import 'package:tarsobank/src/views/splash_screen.dart';
+import 'package:tarsobank/src/database/database_initializer.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  await initializeTestUser();
+  
   runApp(const MyApp());
 }
 
