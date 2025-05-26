@@ -8,7 +8,7 @@ class SuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Fundo branco como no design
+      backgroundColor: Colors.white,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
@@ -43,7 +43,7 @@ class SuccessScreen extends StatelessWidget {
               Text(
                 'Conta registrada\ncom sucesso',
                 style: AppTheme.bodySmall.copyWith(
-                  color: AppTheme.primaryDark.withOpacity(0.5),
+                  color: AppTheme.primaryDark,
                 ),
                 textAlign: TextAlign.center,
               ),
