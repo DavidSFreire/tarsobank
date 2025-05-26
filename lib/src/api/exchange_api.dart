@@ -6,7 +6,7 @@ class CurrencyService {
   static const String _baseUrl = 'https://api.hgbrasil.com/finance';
 
   Future<double> fetchExchangeRate(String fromCurrency, String toCurrency) async {
-    final url = Uri.parse('$_baseUrl?key=$_apiKey');
+    final url = Uri.parse('$_baseUrl?key=$_apiKey');  
 
     final response = await http.get(url);
 

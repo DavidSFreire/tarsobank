@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tarsobank/src/models/user_model.dart';
 import 'package:tarsobank/src/utils/theme.dart';
+import 'package:tarsobank/src/views/home/home_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   final User user;
@@ -74,7 +75,15 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Configurações de Perfil'),
         backgroundColor: AppTheme.primaryDark,
-        leading: const BackButton(color: Colors.white),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen(user: user)),
+            );
+          },
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
