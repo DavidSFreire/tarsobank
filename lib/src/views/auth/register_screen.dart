@@ -3,7 +3,7 @@ import 'package:tarsobank/src/utils/endereco_dialog.dart';
 import 'package:tarsobank/src/utils/theme.dart';
 import 'package:tarsobank/src/views/auth/login_screen.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:tarsobank/src/views/auth/success_screen.dart';
+import 'package:tarsobank/src/views/auth/success_register_screen.dart';
 import 'package:tarsobank/src/database/local_db.dart';
 import 'package:tarsobank/src/models/user_model.dart';
 import 'dart:math';

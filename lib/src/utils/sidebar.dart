@@ -59,11 +59,16 @@ class AppSidebar extends StatelessWidget {
                     padding: const EdgeInsets.all(2),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: AppTheme.dividerColor, width: 1),
+                      border: Border.all(
+                        color: AppTheme.dividerColor,
+                        width: 1,
+                      ),
                     ),
                     child: CircleAvatar(
                       radius: 36,
-                      backgroundColor: AppTheme.textPrimary.withAlpha((0.05 * 255).round()),
+                      backgroundColor: AppTheme.textPrimary.withAlpha(
+                        (0.05 * 255).round(),
+                      ),
                       child: Icon(
                         Icons.person,
                         size: 42,
@@ -93,7 +98,10 @@ class AppSidebar extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 10),
-              Divider(color: AppTheme.dividerColor.withAlpha((0.5 * 255).round()), height: 30),
+              Divider(
+                color: AppTheme.dividerColor.withAlpha((0.5 * 255).round()),
+                height: 30,
+              ),
               const SizedBox(height: 10),
               _buildDrawerItem(
                 icon: Icons.account_balance_wallet_outlined,
@@ -117,7 +125,9 @@ class AppSidebar extends StatelessWidget {
                 onTap: () {
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Tela de Estatísticas (a implementar)')),
+                    const SnackBar(
+                      content: Text('Tela de Estatísticas (a implementar)'),
+                    ),
                   );
                 },
               ),
@@ -126,9 +136,7 @@ class AppSidebar extends StatelessWidget {
                 title: 'Transferências',
                 onTap: () {
                   Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Tela de Transferências (a implementar)')),
-                  );
+                  onNavigateToTab(2);
                 },
               ),
               _buildDrawerItem(
@@ -137,7 +145,9 @@ class AppSidebar extends StatelessWidget {
                 onTap: () {
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Tela de Configurações (a implementar)')),
+                    const SnackBar(
+                      content: Text('Tela de Configurações (a implementar)'),
+                    ),
                   );
                 },
               ),
@@ -146,12 +156,17 @@ class AppSidebar extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   icon: const Icon(Icons.logout, color: Colors.white, size: 20),
-                  label: Text('Sair', style: AppTheme.buttonText.copyWith(fontSize: 16)),
+                  label: Text(
+                    'Sair',
+                    style: AppTheme.buttonText.copyWith(fontSize: 16),
+                  ),
                   onPressed: () {
                     Navigator.pop(context);
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => const LoginScreen()),
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
                       (Route<dynamic> route) => false,
                     );
                   },

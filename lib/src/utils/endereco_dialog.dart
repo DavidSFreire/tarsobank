@@ -48,7 +48,7 @@ class _EnderecoDialogState extends State<EnderecoDialog> {
 
       try {
         final enderecoData = await _viaCepService.fetchCep(unmaskedCep);
-        if (mounted) { 
+        if (mounted) {
           if (enderecoData != null && !enderecoData.erro) {
             rua.text = enderecoData.logradouro;
             bairro.text = enderecoData.bairro;
@@ -59,7 +59,7 @@ class _EnderecoDialogState extends State<EnderecoDialog> {
               _cepError = 'CEP não encontrado.';
             });
           } else {
-             setState(() {
+            setState(() {
               _cepError = 'Não foi possível obter os dados do CEP.';
             });
           }
@@ -67,7 +67,8 @@ class _EnderecoDialogState extends State<EnderecoDialog> {
       } catch (e) {
         if (mounted) {
           setState(() {
-            _cepError = 'Erro ao buscar CEP: ${e.toString().substring(0, (e.toString().length > 50) ? 50 : e.toString().length)}...';
+            _cepError =
+                'Erro ao buscar CEP: ${e.toString().substring(0, (e.toString().length > 50) ? 50 : e.toString().length)}...';
           });
         }
       } finally {
@@ -78,14 +79,16 @@ class _EnderecoDialogState extends State<EnderecoDialog> {
         }
       }
     } else {
-
-      if (rua.text.isNotEmpty || bairro.text.isNotEmpty || cidade.text.isNotEmpty || estado.text.isNotEmpty) {
+      if (rua.text.isNotEmpty ||
+          bairro.text.isNotEmpty ||
+          cidade.text.isNotEmpty ||
+          estado.text.isNotEmpty) {
         setState(() {
           rua.clear();
           bairro.clear();
           cidade.clear();
           estado.clear();
-          _cepError = null; 
+          _cepError = null;
         });
       }
     }
@@ -107,7 +110,7 @@ class _EnderecoDialogState extends State<EnderecoDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Endereço'),
-      content: SingleChildScrollView (
+      content: SingleChildScrollView(
         child: Form(
           key: _formKey,
           child: Column(
@@ -122,18 +125,20 @@ class _EnderecoDialogState extends State<EnderecoDialog> {
                   hintText: '00000-000',
                   border: const OutlineInputBorder(),
                   errorText: _cepError,
-                  suffixIcon: _isLoadingCep
-                      ? const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : null,
+                  suffixIcon:
+                      _isLoadingCep
+                          ? const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                          : null,
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'CEP é obrigatório';
                   }
-                  if (cepFormatter.getUnmaskedText().length != 8 && _cepError == null) {
+                  if (cepFormatter.getUnmaskedText().length != 8 &&
+                      _cepError == null) {
                     return 'CEP inválido';
                   }
                   return null;
@@ -148,53 +153,88 @@ class _EnderecoDialogState extends State<EnderecoDialog> {
                   if (cepFormatter.getUnmaskedText().length == 8) {
                     _buscarCep();
                   } else if (cepFormatter.getUnmaskedText().isEmpty) {
-
-                     rua.clear();
-                     bairro.clear();
-                     cidade.clear();
-                     estado.clear();
-                     complemento.clear();
+                    rua.clear();
+                    bairro.clear();
+                    cidade.clear();
+                    estado.clear();
+                    complemento.clear();
                   }
                 },
               ),
               const SizedBox(height: 16),
               TextFormField(
-                  controller: rua,
-                  decoration: const InputDecoration(labelText: 'Rua', border: OutlineInputBorder()),
-                  validator: (value) => (value == null || value.isEmpty) ? 'Rua é obrigatória' : null,
+                controller: rua,
+                decoration: const InputDecoration(
+                  labelText: 'Rua',
+                  border: OutlineInputBorder(),
+                ),
+                validator:
+                    (value) =>
+                        (value == null || value.isEmpty)
+                            ? 'Rua é obrigatória'
+                            : null,
               ),
               const SizedBox(height: 16),
               TextFormField(
-                  controller: numero,
-                  decoration: const InputDecoration(labelText: 'Número', border: OutlineInputBorder()),
-                  keyboardType: TextInputType.number,
-                  validator: (value) => (value == null || value.isEmpty) ? 'Número é obrigatório' : null,
+                controller: numero,
+                decoration: const InputDecoration(
+                  labelText: 'Número',
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.number,
+                validator:
+                    (value) =>
+                        (value == null || value.isEmpty)
+                            ? 'Número é obrigatório'
+                            : null,
               ),
               const SizedBox(height: 16),
               TextFormField(
-                  controller: complemento,
-                  decoration: const InputDecoration(labelText: 'Complemento (Opcional)', border: OutlineInputBorder())),
-              const SizedBox(height: 16),
-              TextFormField(
-                  controller: bairro,
-                  decoration: const InputDecoration(labelText: 'Bairro', border: OutlineInputBorder()),
-                  validator: (value) => (value == null || value.isEmpty) ? 'Bairro é obrigatório' : null,
+                controller: complemento,
+                decoration: const InputDecoration(
+                  labelText: 'Complemento (Opcional)',
+                  border: OutlineInputBorder(),
+                ),
               ),
               const SizedBox(height: 16),
               TextFormField(
-                  controller: cidade,
-                  decoration: const InputDecoration(labelText: 'Cidade', border: OutlineInputBorder()),
-                  validator: (value) => (value == null || value.isEmpty) ? 'Cidade é obrigatória' : null,
+                controller: bairro,
+                decoration: const InputDecoration(
+                  labelText: 'Bairro',
+                  border: OutlineInputBorder(),
+                ),
+                validator:
+                    (value) =>
+                        (value == null || value.isEmpty)
+                            ? 'Bairro é obrigatório'
+                            : null,
               ),
               const SizedBox(height: 16),
               TextFormField(
-                  controller: estado,
-                  decoration: const InputDecoration(labelText: 'Estado (UF)', border: OutlineInputBorder()),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) return 'Estado é obrigatório';
-                    if (value.length != 2) return 'UF inválida (ex: SP)';
-                    return null;
-                  }
+                controller: cidade,
+                decoration: const InputDecoration(
+                  labelText: 'Cidade',
+                  border: OutlineInputBorder(),
+                ),
+                validator:
+                    (value) =>
+                        (value == null || value.isEmpty)
+                            ? 'Cidade é obrigatória'
+                            : null,
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: estado,
+                decoration: const InputDecoration(
+                  labelText: 'Estado (UF)',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty)
+                    return 'Estado é obrigatório';
+                  if (value.length != 2) return 'UF inválida (ex: SP)';
+                  return null;
+                },
               ),
             ],
           ),
@@ -208,7 +248,6 @@ class _EnderecoDialogState extends State<EnderecoDialog> {
         ElevatedButton(
           onPressed: () {
             if (_formKey.currentState!.validate()) {
-  
               final enderecoCompleto = {
                 'cep': cep.text,
                 'rua': rua.text,
@@ -218,9 +257,9 @@ class _EnderecoDialogState extends State<EnderecoDialog> {
                 'cidade': cidade.text,
                 'estado': estado.text,
               };
-            final String enderecoFormatado =
-          '${rua.text}, ${numero.text}${complemento.text.isNotEmpty ? ' - ${complemento.text}' : ''}, '
-          '${bairro.text}, ${cidade.text} - ${estado.text}, CEP: ${cep.text}';  
+              final String enderecoFormatado =
+                  '${rua.text}, ${numero.text}${complemento.text.isNotEmpty ? ' - ${complemento.text}' : ''}, '
+                  '${bairro.text}, ${cidade.text} - ${estado.text}, CEP: ${cep.text}';
               Navigator.pop(context, enderecoFormatado);
             }
           },

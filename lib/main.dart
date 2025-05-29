@@ -5,9 +5,9 @@ import 'package:tarsobank/src/database/database_initializer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  await initializeTestUser();
-  
+
+  await initializeTestUsers();
+
   runApp(const MyApp());
 }
 
