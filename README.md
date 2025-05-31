@@ -105,7 +105,7 @@ Para rodar o projeto TarsoBank localmente, siga os passos abaixo:
 
 Você pode baixar a versão mais recente do aplicativo TarsoBank para Android diretamente no link abaixo:
 
-* **[Download TarsoBank.apk](https://drive.google.com/file/d/1o4IVtlLugTFjXUbjpznFxf08fbrF4Mba/view?usp=sharing)**
+* **[Download TarsoBank.apk](https://drive.google.com/file/d/1k2ob4X6Vw2DPefnp5A_K0KBBCRkeSV66/view?usp=sharing)**
 
 ---
 
