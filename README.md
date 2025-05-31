@@ -22,6 +22,7 @@ O contexto de um banco digital serve como um estudo de caso prático para aplica
 * **Cotação de Moedas:** Visualização de cotações de moedas (integração com API de câmbio).
 * **Gerenciamento de Perfil:** Tela para o usuário visualizar e gerenciar suas informações.
 * **Armazenamento Local:** Persistência de dados utilizando SQLite para gerenciar informações do usuário e transações.
+* **Compartilhamento:** Utilização dos plugins share e pdf para compartilhamento de comprovante de transferência 
 
 
 ## Telas Principais
@@ -56,47 +57,7 @@ O aplicativo conta com as seguintes telas principais:
     * **Descrição:** Exibe cotações de moedas ou outros ativos financeiros em tempo real (ou próximo do real), obtidas através de uma API externa.
     * **Funcionalidades:** Lista de moedas e seus valores atualizados, possivelmente gráficos históricos.
 
-## 🛠 Tecnologias Utilizadas
 
-* **Flutter:** Framework de desenvolvimento de interface de usuário de código aberto do Google para criar aplicativos compilados nativamente para mobile (iOS e Android), web e desktop a partir de uma única base de código.
-* **Dart:** Linguagem de programação otimizada para UI, desenvolvida pelo Google, utilizada pelo Flutter.
-* **SQLite:** Banco de dados relacional leve e embutido, utilizado para armazenamento local de dados no aplicativo.
-* **Provider:** (ou outro gerenciador de estado como GetX, BLoC, etc.) Para gerenciamento de estado na aplicação, garantindo uma arquitetura robusta e reativa. (Verifique o `pubspec.yaml` para o gerenciador de estado exato, caso não seja Provider).
-* **HTTP:** Para comunicação com APIs externas.
-* **SQFlite:** Plugin para Flutter que permite a interação com o banco de dados SQLite.
-## Telas Principais
-
-O aplicativo conta com as seguintes telas principais:
-
-1.  **SplashScreen (`splash_screen.dart`):**
-    * **Descrição:** Tela inicial exibida durante o carregamento do aplicativo, muitas vezes usada para carregar dados iniciais.
-    * **Funcionalidades:** Apresentação da marca, transição para a tela de autenticação ou dashboard.
-
-2.  **Tela de Login (`auth/login_screen.dart`):**
-    * **Descrição:** Permite que usuários existentes acessem suas contas.
-    * **Funcionalidades:** Campos para e-mail/usuário e senha, botão de login, navegação para a tela de cadastro.
-
-3.  **Tela de Cadastro (`auth/register_screen.dart`):**
-    * **Descrição:** Permite que novos usuários criem uma conta no TarsoBank.
-    * **Funcionalidades:** Campos para informações pessoais e de login (nome, e-mail, senha), botão de registro.
-
-4.  **Tela Inicial / Dashboard (`home/home_screen.dart` e `home/dashboard.dart`):**
-    * **Descrição:** Tela principal após o login, exibindo um resumo das atividades financeiras, saldo, e acesso rápido a outras funcionalidades do banco.
-    * **Funcionalidades:** Visualização de saldo, atalhos para transferências, extrato (se implementado), cotações de moedas.
-
-5.  **Tela de Perfil (`profile/profile_screen.dart`):**
-    * **Descrição:** Permite ao usuário visualizar e, possivelmente, editar suas informações pessoais e configurações da conta.
-    * **Funcionalidades:** Exibição de dados do usuário, opções de configuração (ex: mudar senha, notificações).
-
-6.  **Tela de Transferência (`transfer/transfer_screen.dart`):**
-    * **Descrição:** Interface para o usuário realizar transferências de valores para outras contas dentro ou fora do TarsoBank.
-    * **Funcionalidades:** Seleção de destinatário (digitação de CPF/CNPJ ou dados bancários), inserção do valor da transferência, confirmação.
-
-7.  **Tela de Cotação (`quotation/quotation_screen.dart`):**
-    * **Descrição:** Exibe cotações de moedas ou outros ativos financeiros em tempo real (ou próximo do real), obtidas através de uma API externa.
-    * **Funcionalidades:** Lista de moedas e seus valores atualizados, possivelmente gráficos históricos.
-
----
 
 ## 🛠 Tecnologias Utilizadas
 
@@ -106,7 +67,7 @@ O aplicativo conta com as seguintes telas principais:
 * **Provider:** (ou outro gerenciador de estado como GetX, BLoC, etc.) Para gerenciamento de estado na aplicação, garantindo uma arquitetura robusta e reativa.
 * **HTTP:** Para comunicação com APIs externas.
 * **SQFlite:** Plugin para Flutter que permite a interação com o banco de dados SQLite.
-* **Outros pacotes:** Dependendo das funcionalidades implementadas (por exemplo, `intl` para formatação, `url_launcher` para abrir URLs externas, etc.).
+* **Pdf:** Dependência utilizada para compartilhar o comprovante em formato pdf.
 
 ---
 
