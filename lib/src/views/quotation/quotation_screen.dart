@@ -30,15 +30,18 @@ class _QuotationScreenState extends State<QuotationScreen> {
     setState(() => isLoading = true);
 
     try {
-      final rate = await currencyService.fetchExchangeRate(fromCurrency, toCurrency);
+      final rate = await currencyService.fetchExchangeRate(
+        fromCurrency,
+        toCurrency,
+      );
       setState(() {
         exchangeRate = rate;
       });
     } catch (e) {
       debugPrint('Erro: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Erro ao buscar cotação')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Erro ao buscar cotação')));
     } finally {
       setState(() => isLoading = false);
     }
@@ -63,10 +66,7 @@ class _QuotationScreenState extends State<QuotationScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Image.asset(
-              'assets/images/exchange.png',
-              height: 200,
-            ),
+            Image.asset('assets/images/exchange.png', height: 200),
             const SizedBox(height: 24),
             Card(
               elevation: 4,
@@ -147,13 +147,13 @@ class _QuotationScreenState extends State<QuotationScreen> {
                     isLoading
                         ? const CircularProgressIndicator()
                         : Text(
-                            'Cotação Atual\n1 $fromCurrency = ${exchangeRate.toStringAsFixed(2)} $toCurrency',
-                            textAlign: TextAlign.center,
-                            style: AppTheme.bodySmall.copyWith(
-                              color: AppTheme.primaryDark,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          'Cotação Atual\n1 $fromCurrency = ${exchangeRate.toStringAsFixed(2)} $toCurrency',
+                          textAlign: TextAlign.center,
+                          style: AppTheme.bodySmall.copyWith(
+                            color: AppTheme.primaryDark,
+                            fontWeight: FontWeight.bold,
                           ),
+                        ),
 
                     const SizedBox(height: 16),
 

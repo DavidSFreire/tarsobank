@@ -14,7 +14,10 @@ dependencies:
   http: ^1.2.1
   crypto: ^3.0.3
   path_provider: ^2.1.1
-
+  share_plus: ^11.0.0
+  intl: ^0.20.2
+  validadores: ^1.0.9
+  pdf: ^3.11.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

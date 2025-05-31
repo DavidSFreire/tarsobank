@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tarsobank/src/utils/theme.dart';
-import 'package:tarsobank/src/views/auth/login_screen.dart';
 
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen({super.key});
@@ -26,25 +25,16 @@ class SuccessScreen extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  const Icon(
-                    Icons.check,
-                    size: 70,
-                    color: Colors.white,
-                  ),
+                  const Icon(Icons.check, size: 70, color: Colors.white),
                 ],
               ),
               const SizedBox(height: 40),
-              Text(
-                'Parabéns!',
-                style: AppTheme.loginTitle,
-              ),
+              Text('Parabéns!', style: AppTheme.loginTitle),
               const SizedBox(height: 8),
               // Texto secundário
               Text(
                 'Conta registrada\ncom sucesso',
-                style: AppTheme.bodySmall.copyWith(
-                  color: AppTheme.primaryDark,
-                ),
+                style: AppTheme.bodySmall.copyWith(color: AppTheme.primaryDark),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 40),
@@ -54,12 +44,7 @@ class SuccessScreen extends StatelessWidget {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const LoginScreen  (),
-                      ),
-                    );
+                    Navigator.pushReplacementNamed(context, '/login');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppTheme.primaryDark,

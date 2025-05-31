@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tarsobank/src/models/user_model.dart';
+import 'package:tarsobank/src/database/models/user_model.dart';
 import 'package:tarsobank/src/utils/theme.dart';
-import 'package:tarsobank/src/views/home/sidebar.dart';
-import 'package:tarsobank/src/views/profile/profile_screen.dart';
-import 'package:tarsobank/src/views/quotation/quotation_screen.dart';
-import 'package:tarsobank/src/views/home/botton_button.dart';
-
+import 'package:tarsobank/src/utils/sidebar.dart';
+import 'package:tarsobank/src/utils/botton_button.dart';
 
 class HomeScreen extends StatefulWidget {
   final User user;
@@ -20,72 +17,102 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  late User _currentUser;
   late List<Widget> _mainScreenTabs;
 
   @override
   void initState() {
     super.initState();
-    _mainScreenTabs = <Widget>[
-      _buildHomeScreenContent(context, widget.user, _handleGridItemTap),
-      const Scaffold(body: Center(child: Text('Tela de Carteira (Futura)'))),
-    ];
+    _currentUser = widget.user;
   }
 
-  void _handleGridItemTap(int index) {
-    if (index == 1) { // Carteira
-      setState(() {
-        _selectedIndex = 1;
-      });
-    } else if (index == 2) { // Cotação
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const QuotationScreen()),
-      );
-    } else if (index == 3) { // Perfil
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ProfileScreen(user: widget.user)),
-      );
+  void _handleGridItemTap(int gridItemIndex, BuildContext context) async {
+    switch (gridItemIndex) {
+      case 0:
+        if (_selectedIndex != 1) {
+          setState(() {
+            _selectedIndex = 1;
+          });
+        }
+        break;
+      case 1:
+        Navigator.pushNamed(context, '/transfer', arguments: _currentUser);
+        break;
+      case 2:
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Tela de Saque (a implementar)')),
+        );
+        break;
+      case 5:
+        Navigator.pushNamed(context, '/quotation');
+        break;
+      case 8:
+        final User? updatedUserFromProfile =
+            await Navigator.pushNamed(
+                  context,
+                  '/profile',
+                  arguments: _currentUser,
+                )
+                as User?;
+        if (updatedUserFromProfile != null && mounted) {
+          setState(() {
+            _currentUser = updatedUserFromProfile;
+          });
+        }
+        break;
+      default:
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Ação para "${_getGridLabel(gridItemIndex)}" (a implementar)',
+            ),
+          ),
+        );
+        break;
     }
+  }
+
+  String _getGridLabel(int index) {
+    const labels = [
+      'Carteira',
+      'Transferência',
+      'Saque',
+      'Recarga',
+      'Pagamentos',
+      'Cotação',
+      'Cartão de crédito',
+      'Comprovantes',
+      'Perfil',
+    ];
+    return (index >= 0 && index < labels.length)
+        ? labels[index]
+        : 'Item $index';
   }
 
   void _handleBottomNavTap(int index) {
-    if (index == 0 || index == 1) {
+    if (index == 2) {
+      Navigator.pushNamed(context, '/quotation');
+    } else if (index == 3) {
+      Navigator.pushNamed(context, '/profile', arguments: _currentUser);
+    } else {
       setState(() {
         _selectedIndex = index;
       });
-    } else if (index == 2) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const QuotationScreen()),
-      );
-    } else if (index == 3) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ProfileScreen(user: widget.user)),
-      );
     }
   }
 
-  void _handleSidebarNavigation(int tabIndex, {Widget? screenToPush}) {
-    Navigator.pop(context); // Fecha o Drawer
-    if (screenToPush != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => screenToPush),
-      );
-    } else {
-       if (tabIndex == 0 || tabIndex == 1) {
-         setState(() {
-           _selectedIndex = tabIndex;
-         });
-       }
-    }
+  void _handleSidebarNavigation(String routeName, {User? userArgument}) {
+    Navigator.pop(context);
+    Navigator.pushNamed(context, routeName, arguments: userArgument);
   }
-
 
   @override
   Widget build(BuildContext context) {
+    _mainScreenTabs = <Widget>[
+      _buildHomeScreenContent(context, _currentUser, _handleGridItemTap),
+      const Scaffold(body: Center(child: Text('Tela de Carteira (Futura)'))),
+    ];
+
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: AppTheme.background,
@@ -96,9 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _scaffoldKey.currentState?.openDrawer();
           },
         ),
-        title: Text(
-          'Olá, ${widget.user.name.split(' ')[0]}',
-        ),
+        title: Text('Olá, ${_currentUser.name.split(' ')[0]}'),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications_none),
@@ -107,19 +132,20 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       drawer: AppSidebar(
-        user: widget.user,
-        onNavigateToTab: (tabIndex) {
-          if (tabIndex == 1) { // Carteira
-             _handleSidebarNavigation(tabIndex);
-          } else if (tabIndex == 3) { // Perfil
-             _handleSidebarNavigation(0, screenToPush: ProfileScreen(user: widget.user));
+        user: _currentUser,
+        onNavigateToTab: (sidebarTabIndex) {
+          if (sidebarTabIndex == 1) {
+            _handleSidebarNavigation('/home', userArgument: _currentUser);
+          }
+          if (sidebarTabIndex == 3) {
+            _handleSidebarNavigation('/profile', userArgument: _currentUser);
+          }
+          if (sidebarTabIndex == 2) {
+            _handleSidebarNavigation('/transfer', userArgument: _currentUser);
           }
         },
       ),
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: _mainScreenTabs,
-      ),
+      body: IndexedStack(index: _selectedIndex, children: _mainScreenTabs),
       bottomNavigationBar: Container(
         margin: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 8),
         decoration: BoxDecoration(
@@ -187,7 +213,10 @@ class _HomeScreenState extends State<HomeScreen> {
           vertical: isActive ? 10.0 : 8.0,
         ),
         decoration: BoxDecoration(
-          color: isActive ? AppTheme.primaryLight.withAlpha((0.25 * 255).round()) : Colors.transparent,
+          color:
+              isActive
+                  ? AppTheme.primaryLight.withAlpha((0.25 * 255).round())
+                  : Colors.transparent,
           borderRadius: BorderRadius.circular(30),
         ),
         child: Icon(
@@ -201,7 +230,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-Widget _buildHomeScreenContent(BuildContext context, User user, Function(int) onGridItemTapped) {
+Widget _buildHomeScreenContent(
+  BuildContext context,
+  User user,
+  Function(int, BuildContext) onGridItemTapped,
+) {
   return SingleChildScrollView(
     padding: const EdgeInsets.all(20.0),
     child: Column(
@@ -209,14 +242,18 @@ Widget _buildHomeScreenContent(BuildContext context, User user, Function(int) on
       children: [
         Text(
           'Saldo atual',
-          style: AppTheme.bodyLarge?.copyWith(
-              color: AppTheme.textSecondary, fontWeight: FontWeight.w500),
+          style: AppTheme.bodyLarge.copyWith(
+            color: AppTheme.textSecondary,
+            fontWeight: FontWeight.w500,
+          ),
         ),
         const SizedBox(height: 4),
         Text(
-          'R\$800.00',
-          style: AppTheme.headlineLarge
-              ?.copyWith(color: AppTheme.primaryLight, fontWeight: FontWeight.bold),
+          'R\$${user.balance.toStringAsFixed(2)}',
+          style: AppTheme.headlineLarge.copyWith(
+            color: AppTheme.primaryLight,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         const SizedBox(height: 32),
         GridView.count(
@@ -229,83 +266,47 @@ Widget _buildHomeScreenContent(BuildContext context, User user, Function(int) on
             HomeActionButton(
               icon: Icons.account_balance_wallet_outlined,
               label: 'Carteira',
-              onTap: () {
-                onGridItemTapped(1);
-              },
+              onTap: () => onGridItemTapped(0, context),
             ),
             HomeActionButton(
               icon: Icons.swap_horiz_outlined,
               label: 'Transferência',
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Tela de Transferência (a implementar)')),
-                );
-              },
+              onTap: () => onGridItemTapped(1, context),
             ),
             HomeActionButton(
               icon: Icons.savings_outlined,
               label: 'Saque',
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Tela de Saque (a implementar)')),
-                );
-              },
+              onTap: () => onGridItemTapped(2, context),
             ),
             HomeActionButton(
               icon: Icons.system_update_alt_outlined,
               label: 'Recarga',
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Tela de Recarga (a implementar)')),
-                );
-              },
+              onTap: () => onGridItemTapped(3, context),
             ),
             HomeActionButton(
               icon: Icons.receipt_long_outlined,
               label: 'Pagamentos',
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Tela de Pagamentos (a implementar)')),
-                );
-              },
+              onTap: () => onGridItemTapped(4, context),
             ),
             HomeActionButton(
               icon: Icons.trending_up_outlined,
               label: 'Cotação',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const QuotationScreen()),
-                );
-              },
+              onTap: () => onGridItemTapped(5, context),
             ),
             HomeActionButton(
               icon: Icons.credit_card_outlined,
               label: 'Cartão de crédito',
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Tela de Cartão de Crédito (a implementar)')),
-                );
-              },
+              onTap: () => onGridItemTapped(6, context),
             ),
             HomeActionButton(
               icon: Icons.article_outlined,
               label: 'Comprovantes',
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Tela de Comprovantes (a implementar)')),
-                );
-              },
+              onTap: () => onGridItemTapped(7, context),
             ),
             HomeActionButton(
               icon: Icons.person_outline,
               label: 'Perfil',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ProfileScreen(user: user)),
-                );
-              },
+              onTap: () => onGridItemTapped(8, context),
             ),
           ],
         ),

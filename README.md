@@ -54,7 +54,7 @@ tarsobank/
 └── README.md               # Este arquivo :)
 ```
 
-##  <0xF0><0x9F><0x93><0xB1> Telas Principais
+## Telas Principais
 
 O aplicativo conta com as seguintes telas principais:
 
