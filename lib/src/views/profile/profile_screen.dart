@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tarsobank/src/models/user_model.dart';
+import 'package:tarsobank/src/database/models/user_model.dart';
 import 'package:tarsobank/src/utils/theme.dart';
-import 'package:tarsobank/src/views/home/home_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   final User user;
@@ -78,9 +77,10 @@ class ProfileScreen extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.pushReplacement(
+            Navigator.pushReplacementNamed(
               context,
-              MaterialPageRoute(builder: (context) => HomeScreen(user: user)),
+              '/home',
+              arguments: user,
             );
           },
         ),

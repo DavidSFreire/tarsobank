@@ -50,7 +50,7 @@ class User {
       password: map['password'],
       accountNumber: map['accountNumber'],
       agency: map['agency'],
-      balance: map['balance']?.toDouble() ?? 0.0,
+      balance: (map['balance'] as num?)?.toDouble() ?? 1000.0,
     );
   }
 

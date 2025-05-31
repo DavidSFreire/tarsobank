@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tarsobank/src/models/user_model.dart';
+import 'package:tarsobank/src/database/models/user_model.dart';
 import 'package:tarsobank/src/utils/theme.dart';
 import 'package:tarsobank/src/views/auth/login_screen.dart';
 
@@ -30,7 +30,7 @@ class AppSidebar extends StatelessWidget {
             const SizedBox(width: 20),
             Text(
               title,
-              style: AppTheme.bodyLarge?.copyWith(
+              style: AppTheme.bodyLarge.copyWith(
                 color: AppTheme.textPrimary,
                 fontWeight: FontWeight.w500,
               ),
@@ -79,7 +79,7 @@ class AppSidebar extends StatelessWidget {
                   const SizedBox(height: 16),
                   Text(
                     user.name,
-                    style: AppTheme.headlineSmall?.copyWith(
+                    style: AppTheme.headlineSmall.copyWith(
                       color: AppTheme.textPrimary,
                       fontWeight: FontWeight.w600,
                     ),
@@ -89,7 +89,7 @@ class AppSidebar extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     user.email,
-                    style: AppTheme.bodyMedium?.copyWith(
+                    style: AppTheme.bodyMedium.copyWith(
                       color: AppTheme.textSecondary,
                     ),
                     maxLines: 1,
@@ -108,7 +108,11 @@ class AppSidebar extends StatelessWidget {
                 title: 'Carteira',
                 onTap: () {
                   Navigator.pop(context);
-                  onNavigateToTab(1);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Tela Carteira (a implementar)'),
+                    ),
+                  );
                 },
               ),
               _buildDrawerItem(

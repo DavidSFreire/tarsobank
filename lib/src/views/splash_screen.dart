@@ -13,13 +13,15 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.of(context).pushReplacement(PageRouteBuilder(
-        transitionDuration: const Duration(milliseconds: 800),
-        pageBuilder: (_, __, ___) => const LoginScreen(),
-        transitionsBuilder: (_, animation, __, child) {
-          return FadeTransition(opacity: animation, child: child);
-        },
-      ));
+      Navigator.of(context).pushReplacement(
+        PageRouteBuilder(
+          transitionDuration: const Duration(milliseconds: 800),
+          pageBuilder: (_, __, ___) => const LoginScreen(),
+          transitionsBuilder: (_, animation, __, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        ),
+      );
     });
   }
 
@@ -41,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 fontSize: 48,
                 fontWeight: FontWeight.w700,
                 letterSpacing: 0.5,
-                height: 1.1, 
+                height: 1.1,
               ),
             ),
             const SizedBox(height: 16),

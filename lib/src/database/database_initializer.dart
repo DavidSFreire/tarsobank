@@ -1,5 +1,5 @@
 import 'package:tarsobank/src/database/local_db.dart';
-import 'package:tarsobank/src/models/user_model.dart';
+import 'package:tarsobank/src/database/models/user_model.dart';
 
 Future<void> initializeTestUsers() async {
   final dbHelper = DatabaseHelper();

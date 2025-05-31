@@ -248,15 +248,6 @@ class _EnderecoDialogState extends State<EnderecoDialog> {
         ElevatedButton(
           onPressed: () {
             if (_formKey.currentState!.validate()) {
-              final enderecoCompleto = {
-                'cep': cep.text,
-                'rua': rua.text,
-                'numero': numero.text,
-                'complemento': complemento.text,
-                'bairro': bairro.text,
-                'cidade': cidade.text,
-                'estado': estado.text,
-              };
               final String enderecoFormatado =
                   '${rua.text}, ${numero.text}${complemento.text.isNotEmpty ? ' - ${complemento.text}' : ''}, '
                   '${bairro.text}, ${cidade.text} - ${estado.text}, CEP: ${cep.text}';

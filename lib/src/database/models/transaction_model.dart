@@ -1,14 +1,14 @@
-// src/models/transaction_model.dart
+
 class TransactionModel {
   final int? id;
   final int?
-  senderUserId; // ID do usuário que enviou (pode ser null para depósitos)
-  final String receiverAccountNumber; // Conta de quem recebeu
+  senderUserId; 
+  final String receiverAccountNumber; 
   final double amount;
   final String timestamp;
   final String? description;
   final String
-  type; // Ex: 'TRANSFER_SENT', 'TRANSFER_RECEIVED', 'DEPOSIT', 'WITHDRAWAL'
+  type; 
 
   TransactionModel({
     this.id,
@@ -33,7 +33,7 @@ class TransactionModel {
   }
 
   Map<String, dynamic> toMapWithoutId() {
-    // Para inserts onde o ID é autoincrement
+    
     return {
       'senderUserId': senderUserId,
       'receiverAccountNumber': receiverAccountNumber,
